@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CEPAT BELAJAR BAHASA JEPANG</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            🇯🇵 日本語
+        </div>
+
+        <div>
+            <h1>Menghapal Bahasa Jepang</h1>
+            <p>Belajar kosakata Jepang Bab 1–25</p>
+        </div>
+    </header>
+
+
+    <nav class="navbar">
+
+        <button class="nav-btn active" onclick="showPage('home')">
+            🏠 Beranda
+        </button>
+
+        <button class="nav-btn" onclick="showPage('vocabulary')">
+            📚 Kosakata
+        </button>
+
+        <button class="nav-btn" onclick="showPage('quiz')">
+            📝 Quiz
+        </button>
+
+        <button class="nav-btn" onclick="showPage('add')">
+            ➕ Tambah
+        </button>
+
+    </nav>
+
+
+    <main>
+
+        <!-- ================= BERANDA ================= -->
+
+        <section id="home" class="page active">
+
+            <div class="hero">
+
+                <div>
+                    <span class="badge">日本語学習</span>
+
+                    <h2>CEPAT HAPAL BAHASA JEPANG 
+                        <br>BERSAMA BARNYOE31
+                        
+                    </h2>Dr.Frof. MUHAMAD SHOLEH 
+
+                    <p>
+                        Hafalkan kosakata, pelajari artinya,
+                        dan uji kemampuanmu melalui quiz.
+                    </p>
+
+                    <button class="primary-btn"
+                            onclick="showPage('vocabulary')">
+                        Mulai Belajar →
+                    </button>
+                </div>
+
+                <div class="japan-icon">
+                    🇯🇵
+                </div>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <span>📚</span>
+                    <h3 id="totalVocabulary">0</h3>
+                    <p>Total Kosakata</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>📖</span>
+                    <h3>25</h3>
+                    <p>Bab</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>⭐</span>
+                    <h3 id="bestScore">0</h3>
+                    <p>Skor Terbaik</p>
+                </div>
+
+            </div>
+
+
+            <div class="home-card">
+
+                <h2>🎯 Target Belajar</h2>
+
+                <p>
+                    Kuasai kosakata sedikit demi sedikit setiap hari.
+                </p>
+
+                <div class="progress-container">
+
+                    <div class="progress-bar">
+                        <div id="progressBar"></div>
+                    </div>
+
+                    <span id="progressText">
+                        0%
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= KOSAKATA ================= -->
+
+        <section id="vocabulary" class="page">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>📚 Daftar Kosakata</h2>
+                    <p>Pelajari kosakata berdasarkan bab.</p>
+                </div>
+
+                <button class="primary-btn"
+                        onclick="showPage('add')">
+                    + Tambah Kosakata
+                </button>
+
+            </div>
+
+
+            <div class="filters">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="🔍 Cari kosakata..."
+                    oninput="displayVocabulary()"
+                >
+
+                <select id="chapterFilter"
+                        onchange="displayVocabulary()">
+
+                    <option value="all">
+                        Semua Bab
+                    </option>
+
+                    <option value="1">Bab 1</option>
+                    <option value="2">Bab 2</option>
+                    <option value="3">Bab 3</option>
+                    <option value="4">Bab 4</option>
+                    <option value="5">Bab 5</option>
+                    <option value="6">Bab 6</option>
+                    <option value="7">Bab 7</option>
+                    <option value="8">Bab 8</option>
+                    <option value="9">Bab 9</option>
+                    <option value="10">Bab 10</option>
+                    <option value="11">Bab 11</option>
+                    <option value="12">Bab 12</option>
+                    <option value="13">Bab 13</option>
+                    <option value="14">Bab 14</option>
+                    <option value="15">Bab 15</option>
+                    <option value="16">Bab 16</option>
+                    <option value="17">Bab 17</option>
+                    <option value="18">Bab 18</option>
+                    <option value="19">Bab 19</option>
+                    <option value="20">Bab 20</option>
+                    <option value="21">Bab 21</option>
+                    <option value="22">Bab 22</option>
+                    <option value="23">Bab 23</option>
+                    <option value="24">Bab 24</option>
+                    <option value="25">Bab 25</option>
+
+                </select>
+
+            </div>
+
+
+            <div id="vocabularyList"
+                 class="vocabulary-grid">
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= QUIZ ================= -->
+
+        <section id="quiz" class="page">
+
+            <div class="quiz-container">
+
+                <div class="quiz-header">
+
+                    <span id="questionNumber">
+                        Soal 1
+                    </span>
+
+                    <span>
+                        Skor:
+                        <strong id="quizScore">
+                            0
+                        </strong>
+                    </span>
+
+                </div>
+
+
+                <div class="quiz-card">
+
+                    <p class="quiz-label">
+                        Apa arti dari kata berikut?
+                    </p>
+
+                    <h1 id="questionWord">
+                        学生
+                    </h1>
+
+                    <p id="questionReading">
+                        がくせい
+                    </p>
+
+
+                    <div id="answers"
+                         class="answers">
+                    </div>
+
+                    <div id="quizResult"
+                         class="quiz-result">
+                    </div>
+
+                    <button id="nextButton"
+                            class="primary-btn"
+                            onclick="nextQuestion()"
+                            style="display:none;">
+                        Soal Berikutnya →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TAMBAH KOSAKATA ================= -->
+
+        <section id="add" class="page">
+
+            <div class="form-card">
+
+                <h2>➕ Tambah Kosakata</h2>
+
+                <p>
+                    Tambahkan kosakata sendiri untuk memperluas
+                    materi belajar.
+                </p>
+
+
+                <form id="vocabularyForm">
+
+                    <label>
+                        Bab
+                    </label>
+
+                    <select id="addChapter" required>
+
+                        <option value="">
+                            Pilih Bab
+                        </option>
+
+                        <option value="1">Bab 1</option>
+                        <option value="2">Bab 2</option>
+                        <option value="3">Bab 3</option>
+                        <option value="4">Bab 4</option>
+                        <option value="5">Bab 5</option>
+                        <option value="6">Bab 6</option>
+                        <option value="7">Bab 7</option>
+                        <option value="8">Bab 8</option>
+                        <option value="9">Bab 9</option>
+                        <option value="10">Bab 10</option>
+                        <option value="11">Bab 11</option>
+                        <option value="12">Bab 12</option>
+                        <option value="13">Bab 13</option>
+                        <option value="14">Bab 14</option>
+                        <option value="15">Bab 15</option>
+                        <option value="16">Bab 16</option>
+                        <option value="17">Bab 17</option>
+                        <option value="18">Bab 18</option>
+                        <option value="19">Bab 19</option>
+                        <option value="20">Bab 20</option>
+                        <option value="21">Bab 21</option>
+                        <option value="22">Bab 22</option>
+                        <option value="23">Bab 23</option>
+                        <option value="24">Bab 24</option>
+                        <option value="25">Bab 25</option>
+
+                    </select>
+
+
+                    <label>
+                        Bahasa Jepang
+                    </label>
+
+                    <input
+                        type="text"
+                        id="addJapanese"
+                        placeholder="Contoh: 学生"
+                        required
+                    >
+
+
+                    <label>
+                        Hiragana / Cara Baca
+                    </label>
+
+                    <input
+                        type="text"
+                        id="addReading"
+                        placeholder="Contoh: がくせい"
+                        required
+                    >
+
+
+                    <label>
+                        Arti Bahasa Indonesia
+                    </label>
+
+                    <input
+                        type="text"
+                        id="addMeaning"
+                        placeholder="Contoh: siswa"
+                        required
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+                        💾 Simpan Kosakata
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 Menghapal Bahasa Jepang
+        </p>
+
+        <p>
+            Belajar sedikit setiap hari 🇯🇵
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
